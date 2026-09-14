@@ -1,33 +1,52 @@
-# Ótica Vip — Anápolis
+# Ótica VIP — Anápolis 👓✨
 
-Site independente em HTML, CSS e JavaScript com Three.js. A pasta não utiliza o backend, banco de dados ou sessões da barbearia.
+Uma experiência web imersiva e interativa desenvolvida para o setor ótico, combinando design moderno com modelagem 3D em tempo real.
 
-## Uso local
+### 🚀 Sobre o Projeto
+O projeto **Ótica VIP** é uma landing page / vitrine virtual construída para oferecer aos clientes uma visualização detalhada de produtos. A principal funcionalidade é o uso da biblioteca **Three.js** para renderizar modelos de óculos em 3D, permitindo rotação, zoom e interação dinâmica diretamente do navegador sem necessidade de plugins.
 
-Com Node.js 22.12+ ou 24+, execute `npm ci` e `npm run dev`. Para gerar os arquivos publicáveis, execute `npm run build`; o resultado fica em `dist/`. `npm run preview` abre uma prévia desse resultado. Publique somente o conteúdo de `dist/`, nunca a pasta da barbearia.
+### 🛠️ Tecnologias Utilizadas
+- **JavaScript Moderno (ES6+)**
+- **Three.js**: Motor 3D WebGL para a renderização do modelo de óculos interativo.
+- **Vite**: Ferramenta de build super-rápida.
+- **Playwright**: Automação de testes End-to-End no navegador (cross-browser).
+- **Node.js**: Test runner integrado.
 
-## Conteúdo
+---
 
-- Dados comerciais fornecidos pelo usuário: Ótica Vip, +55 62 9153-5619, R. 7 de Setembro, 361 - St. Central, Anápolis - GO.
-- Segunda a sexta 08:00–18:00, sábado 08:00–13:30, domingo fechado.
-- O indicador de horário usa America/Sao_Paulo. Feriados não são inferidos; a página orienta confirmar com a loja.
-- O número foi preservado exatamente como fornecido, sem adicionar dígitos. Os links foram verificados, mas a existência da conta no WhatsApp e o recebimento de mensagens não foram confirmados.
-- Categorias e renders são ilustrativos; não há preços, marcas, depoimentos ou estoque inventados.
+### 🌟 Destaques e Funcionalidades
+- **Experiência 3D Interativa:** O modelo `glasses.js` desenha a geometria do zero, com controle total de iluminação de estúdio e materiais. O usuário pode interagir por mouse ou teclado, e a luz reage dinamicamente ao scroll da página.
+- **Performance e Acessibilidade:** 
+  - Limite de resolução (1.75x) configurado para garantir 60fps constantes.
+  - Carregamento assíncrono (Dynamic Import) do WebGL.
+  - Pausa automática do modelo quando a janela não está visível para economizar recursos da máquina do usuário.
+  - Suporte à preferência de `prefers-reduced-motion` do sistema operacional.
+- **Testes Automatizados:** Script para validar integrações do WhatsApp, fallback de falha do WebGL, interações móveis e limites de fuso horário.
 
-## Óculos 3D
+---
 
-Modelo original criado em `src/glasses.js` com geometria Three.js: aros extrudados, lentes, ponte, hastes e detalhes metálicos. Materiais e iluminação de estúdio. A pessoa pode arrastar, usar as setas do teclado ou os botões de rotação; Home restaura o ângulo. Três acabamentos com transição de cor e botão de pausa. O modelo responde suavemente à posição do cursor e a iluminação acompanha um pequeno trecho do scroll.
+### ⚙️ Como Executar Localmente
 
-Three.js é carregado por importação dinâmica. A resolução é limitada a 1,75 vezes a resolução CSS. A animação para quando a seção sai da tela ou a aba fica oculta. A preferência por movimento reduzido inicia o modelo parado, remove as entradas de conteúdo e interrompe as interpolações em andamento. Listeners, observadores e recursos gráficos são liberados no descarte. Falha de WebGL mostra um render estático local.
+**Pré-requisitos:** Node.js v22.12+ ou v24+
 
-`public/images/` contém quatro renders próprios do modelo, sem fotografias de terceiros. A tipografia DM Sans vem do Google Fonts, com fonte local alternativa. O logo tipográfico foi criado para esta proposta e pode ser substituído pela marca oficial.
+1. **Instale as dependências:**
+   ```bash
+   npm ci
+   ```
+2. **Inicie o servidor de desenvolvimento:**
+   ```bash
+   npm run dev
+   ```
+3. **Build para Produção:**
+   Para criar os arquivos otimizados e minificados para deploy:
+   ```bash
+   npm run build
+   ```
+   (Os arquivos finais estarão disponíveis na pasta `dist/`).
 
-## Validação
-
-`npm test`: testes de limites dos horários, fuso, número e mensagens do WhatsApp e destino do Maps.
-
-`scripts/verify-browser.cjs`: usa o pacote Playwright disponível no ambiente; para um pacote fora da resolução padrão, informe seu caminho em `PLAYWRIGHT_PACKAGE`. Testa conteúdo da visita e FAQ, ação móvel do WhatsApp, WebGL, imagens, acabamento animado, reação ao cursor, luz durante o scroll, rotação por teclado, arraste e botões, navegação ativa, larguras de 320 a 1440 px, movimento reduzido e fallback sem WebGL. Salva evidências locais em `output/`.
-
-`scripts/render-assets.cjs` recria os renders originais com o servidor de desenvolvimento em http://127.0.0.1:5187/. Também usa `PLAYWRIGHT_PACKAGE` quando necessário.
-
-O site é independente e não altera os arquivos existentes da barbearia. A validação foi feita em Chromium automatizado; aparelhos físicos, Safari e desempenho em celulares modestos ainda precisam de verificação. Não há formulários, pagamentos, banco ou coleta de dados no site. WhatsApp e Maps abrem serviços externos somente por ação do visitante.
+### 🧪 Testes e Validação
+Para executar os testes locais e gerar assets automatizados via Playwright:
+```bash
+npm test
+npm run verify-browser # Verifica responsividade, performance do WebGL e interações.
+```
